@@ -606,26 +606,9 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// ─── GOOGLE OAUTH (PKCE flow) ─────────────────────────────────────────────
-async function generateCodeVerifier() {
-  const array = new Uint8Array(64);
-  crypto.getRandomValues(array);
-  return btoa(String.fromCharCode(...array)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
-}
-
-async function generateCodeChallenge(verifier) {
-  const data = new TextEncoder().encode(verifier);
-  const hash = await crypto.subtle.digest('SHA-256', data);
-  return btoa(String.fromCharCode(...new Uint8Array(hash))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
-}
-
-async function googleAuth() {
-  const verifier = await generateCodeVerifier();
-  const challenge = await generateCodeChallenge(verifier);
-  sessionStorage.setItem('pkce_verifier', verifier);
-
+// ─── GOOGLE OAUTH (Implicit flow — no server/secret required) ───────────────
+function googleAuth() {
   const redirectUri = window.location.href.split('?')[0].split('#')[0];
-  sessionStorage.setItem('pkce_redirect', redirectUri);
 
   const scopes = [
     'https://www.googleapis.com/auth/gmail.modify',
@@ -636,60 +619,31 @@ async function googleAuth() {
   const params = new URLSearchParams({
     client_id: GOOGLE_CLIENT_ID,
     redirect_uri: redirectUri,
-    response_type: 'code',
+    response_type: 'token',
     scope: scopes,
-    code_challenge: challenge,
-    code_challenge_method: 'S256',
-    access_type: 'offline',
     prompt: 'consent select_account'
   });
 
   window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
 }
 
-async function exchangeCodeForToken(code) {
-  const verifier = sessionStorage.getItem('pkce_verifier');
-  const redirectUri = sessionStorage.getItem('pkce_redirect');
-
-  const resp = await fetch('https://oauth2.googleapis.com/token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      client_id: GOOGLE_CLIENT_ID,
-      code,
-      code_verifier: verifier,
-      grant_type: 'authorization_code',
-      redirect_uri: redirectUri
-    })
-  });
-
-  if (!resp.ok) {
-    const err = await resp.text();
-    throw new Error('Token exchange failed: ' + err);
+function handleImplicitCallback() {
+  const hash = window.location.hash.substring(1);
+  if (!hash) return;
+  const params = new URLSearchParams(hash);
+  const token = params.get('access_token');
+  if (token) {
+    accessToken = token;
+    document.getElementById('authStatus').className = 'auth-badge connected';
+    document.getElementById('authStatus').innerHTML = '<div class="dot green"></div> Connected';
+    log('Google account connected.', 'ok');
+    // Clean URL hash
+    window.history.replaceState({}, '', window.location.pathname + window.location.search);
   }
-
-  const data = await resp.json();
-  accessToken = data.access_token;
-  sessionStorage.removeItem('pkce_verifier');
-  sessionStorage.removeItem('pkce_redirect');
-
-  document.getElementById('authStatus').className = 'auth-badge connected';
-  document.getElementById('authStatus').innerHTML = '<div class="dot green"></div> Connected';
-  log('Google account connected.', 'ok');
-
-  // Clean URL
-  const url = new URL(window.location);
-  url.searchParams.delete('code');
-  url.searchParams.delete('scope');
-  window.history.replaceState({}, '', url);
 }
 
-// Check for OAuth callback
-window.addEventListener('load', () => {
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get('code');
-  if (code) exchangeCodeForToken(code).catch(err => log('Auth error: ' + err.message, 'err'));
-});
+// Check for OAuth callback on load
+window.addEventListener('load', handleImplicitCallback);
 
 // ─── LOGGING ─────────────────────────────────────────────────────────────────
 function log(msg, type = 'info') {
