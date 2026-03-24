@@ -612,8 +612,9 @@ const PROPERTY_MAP = [
 ];
 
 // ─── STATE ───────────────────────────────────────────────────────────────────
-let accessToken = null;   // erobertson@ — send + Drive
-let apAccessToken = null; // accountspayable@ — read inbox
+// Tokens are persisted in sessionStorage so they survive OAuth page reloads
+let accessToken = sessionStorage.getItem('token_sender') || null;
+let apAccessToken = sessionStorage.getItem('token_ap') || null;
 let results = [];
 let logLines = [];
 let counters = { found: 0, skip: 0, yardi: 0, review: 0 };
@@ -680,11 +681,13 @@ function handleImplicitCallback() {
 
  if (role === 'ap') {
  apAccessToken = token;
+ sessionStorage.setItem('token_ap', token);
  document.getElementById('authStatusAP').className = 'auth-badge connected';
  document.getElementById('authStatusAP').innerHTML = '<div class="dot green"></div> Connected';
  log('AP inbox account connected.', 'ok');
  } else {
  accessToken = token;
+ sessionStorage.setItem('token_sender', token);
  document.getElementById('authStatusSender').className = 'auth-badge connected';
  document.getElementById('authStatusSender').innerHTML = '<div class="dot green"></div> Connected';
  log('Sender account connected.', 'ok');
@@ -694,8 +697,19 @@ function handleImplicitCallback() {
  window.history.replaceState({}, '', window.location.pathname + window.location.search);
 }
 
-// Check for OAuth callback on load
-window.addEventListener('load', handleImplicitCallback);
+// Check for OAuth callback on load, then restore any previously saved tokens
+window.addEventListener('load', () => {
+ handleImplicitCallback();
+ // Restore badge states for tokens already in sessionStorage
+ if (apAccessToken && !window.location.hash.includes('access_token')) {
+ document.getElementById('authStatusAP').className = 'auth-badge connected';
+ document.getElementById('authStatusAP').innerHTML = '<div class="dot green"></div> Connected';
+ }
+ if (accessToken && !window.location.hash.includes('access_token')) {
+ document.getElementById('authStatusSender').className = 'auth-badge connected';
+ document.getElementById('authStatusSender').innerHTML = '<div class="dot green"></div> Connected';
+ }
+});
 
 // ─── LOGGING ─────────────────────────────────────────────────────────────────
 function log(msg, type = 'info') {
