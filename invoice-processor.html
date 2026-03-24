@@ -5,525 +5,549 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anchor Investments — AP Automation</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-  :root {
-    --bg: #F5F3EF;
-    --surface: #FFFFFF;
-    --border: #E2DDD6;
-    --text: #1A1814;
-    --muted: #7A7570;
-    --accent: #1A3A2A;
-    --accent-light: #E8F0EB;
-    --accent-mid: #4A7A5A;
-    --danger: #C0392B;
-    --danger-light: #FDECEA;
-    --warning: #B7680F;
-    --warning-light: #FEF4E6;
-    --success: #1A6B3A;
-    --success-light: #E8F5ED;
-    --info: #1A4A7A;
-    --info-light: #E8F0FA;
-    --mono: 'DM Mono', monospace;
-    --sans: 'DM Sans', sans-serif;
-  }
+ :root {
+ --bg: #F5F3EF;
+ --surface: #FFFFFF;
+ --border: #E2DDD6;
+ --text: #1A1814;
+ --muted: #7A7570;
+ --accent: #1A3A2A;
+ --accent-light: #E8F0EB;
+ --accent-mid: #4A7A5A;
+ --danger: #C0392B;
+ --danger-light: #FDECEA;
+ --warning: #B7680F;
+ --warning-light: #FEF4E6;
+ --success: #1A6B3A;
+ --success-light: #E8F5ED;
+ --info: #1A4A7A;
+ --info-light: #E8F0FA;
+ --mono: 'DM Mono', monospace;
+ --sans: 'DM Sans', sans-serif;
+ }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+ * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    font-family: var(--sans);
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
+ body {
+ font-family: var(--sans);
+ background: var(--bg);
+ color: var(--text);
+ min-height: 100vh;
+ }
 
-  header {
-    background: var(--accent);
-    color: white;
-    padding: 0 2rem;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+ header {
+ background: var(--accent);
+ color: white;
+ padding: 0 2rem;
+ height: 56px;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ }
 
-  .logo {
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    opacity: 0.9;
-  }
+ .logo {
+ font-size: 13px;
+ font-weight: 500;
+ letter-spacing: 0.08em;
+ text-transform: uppercase;
+ opacity: 0.9;
+ }
 
-  .logo span { opacity: 0.5; margin: 0 8px; }
+ .logo span { opacity: 0.5; margin: 0 8px; }
 
-  .header-right {
-    font-size: 12px;
-    opacity: 0.6;
-    font-family: var(--mono);
-  }
+ .header-right {
+ font-size: 12px;
+ opacity: 0.6;
+ font-family: var(--mono);
+ }
 
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
-  }
+ .container {
+ max-width: 960px;
+ margin: 0 auto;
+ padding: 2rem 1.5rem;
+ }
 
-  .setup-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-  }
+ .setup-card {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-radius: 12px;
+ padding: 2rem;
+ margin-bottom: 1.5rem;
+ }
 
-  .setup-card h2 {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
+ .setup-card h2 {
+ font-size: 15px;
+ font-weight: 600;
+ margin-bottom: 4px;
+ }
 
-  .setup-card p {
-    font-size: 13px;
-    color: var(--muted);
-    margin-bottom: 1.25rem;
-    line-height: 1.6;
-  }
+ .setup-card p {
+ font-size: 13px;
+ color: var(--muted);
+ margin-bottom: 1.25rem;
+ line-height: 1.6;
+ }
 
-  .field-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
+ .field-row {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 12px;
+ margin-bottom: 12px;
+ }
 
-  .field-row.full { grid-template-columns: 1fr; }
+ .field-row.full { grid-template-columns: 1fr; }
 
-  label {
-    display: block;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 5px;
-  }
+ label {
+ display: block;
+ font-size: 11px;
+ font-weight: 500;
+ letter-spacing: 0.05em;
+ text-transform: uppercase;
+ color: var(--muted);
+ margin-bottom: 5px;
+ }
 
-  input[type="text"], input[type="password"] {
-    width: 100%;
-    padding: 9px 12px;
-    font-size: 13px;
-    font-family: var(--mono);
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    outline: none;
-    transition: border-color 0.15s;
-  }
+ input[type="text"], input[type="password"] {
+ width: 100%;
+ padding: 9px 12px;
+ font-size: 13px;
+ font-family: var(--mono);
+ background: var(--bg);
+ border: 1px solid var(--border);
+ border-radius: 8px;
+ color: var(--text);
+ outline: none;
+ transition: border-color 0.15s;
+ }
 
-  input[type="text"]:focus, input[type="password"]:focus {
-    border-color: var(--accent-mid);
-  }
+ input[type="text"]:focus, input[type="password"]:focus {
+ border-color: var(--accent-mid);
+ }
 
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 9px 18px;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: var(--sans);
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
+ .btn {
+ display: inline-flex;
+ align-items: center;
+ gap: 7px;
+ padding: 9px 18px;
+ font-size: 13px;
+ font-weight: 500;
+ font-family: var(--sans);
+ border-radius: 8px;
+ border: none;
+ cursor: pointer;
+ transition: all 0.15s;
+ }
 
-  .btn-primary { background: var(--accent); color: white; }
-  .btn-primary:hover { background: #0F2A1C; }
-  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+ .btn-primary { background: var(--accent); color: white; }
+ .btn-primary:hover { background: #0F2A1C; }
+ .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  .btn-outline {
-    background: transparent;
-    color: var(--accent);
-    border: 1px solid var(--accent);
-  }
+ .btn-outline {
+ background: transparent;
+ color: var(--accent);
+ border: 1px solid var(--accent);
+ }
 
-  .btn-outline:hover { background: var(--accent-light); }
+ .btn-outline:hover { background: var(--accent-light); }
 
-  .btn-google {
-    background: white;
-    color: #3c4043;
-    border: 1px solid #dadce0;
-    padding: 9px 18px;
-  }
+ .btn-google {
+ background: white;
+ color: #3c4043;
+ border: 1px solid #dadce0;
+ padding: 9px 18px;
+ }
 
-  .btn-google:hover { background: #f8f9fa; }
-  .btn-google svg { width: 18px; height: 18px; }
+ .btn-google:hover { background: #f8f9fa; }
+ .btn-google svg { width: 18px; height: 18px; }
 
-  .auth-section {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
+ .auth-section {
+ display: flex;
+ align-items: center;
+ gap: 12px;
+ flex-wrap: wrap;
+ }
 
-  .auth-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
-  }
+ .auth-badge {
+ display: inline-flex;
+ align-items: center;
+ gap: 6px;
+ padding: 5px 10px;
+ border-radius: 20px;
+ font-size: 12px;
+ font-weight: 500;
+ }
 
-  .auth-badge.connected { background: var(--success-light); color: var(--success); }
-  .auth-badge.disconnected { background: var(--danger-light); color: var(--danger); }
+ .auth-badge.connected { background: var(--success-light); color: var(--success); }
+ .auth-badge.disconnected { background: var(--danger-light); color: var(--danger); }
 
-  .dot { width: 7px; height: 7px; border-radius: 50%; }
-  .dot.green { background: var(--success); }
-  .dot.red { background: var(--danger); }
+ .dot { width: 7px; height: 7px; border-radius: 50%; }
+ .dot.green { background: var(--success); }
+ .dot.red { background: var(--danger); }
 
-  .run-section {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-  }
+ .run-section {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-radius: 12px;
+ padding: 2rem;
+ margin-bottom: 1.5rem;
+ }
 
-  .run-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-  }
+ .run-header {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ margin-bottom: 1rem;
+ }
 
-  .run-title { font-size: 15px; font-weight: 600; }
+ .run-title { font-size: 15px; font-weight: 600; }
 
-  .run-meta {
-    font-size: 12px;
-    color: var(--muted);
-    font-family: var(--mono);
-  }
+ .run-meta {
+ font-size: 12px;
+ color: var(--muted);
+ font-family: var(--mono);
+ }
 
-  .log-area {
-    background: var(--accent);
-    border-radius: 8px;
-    padding: 1rem;
-    min-height: 180px;
-    max-height: 360px;
-    overflow-y: auto;
-    font-family: var(--mono);
-    font-size: 12px;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.7);
-  }
+ .log-area {
+ background: var(--accent);
+ border-radius: 8px;
+ padding: 1rem;
+ min-height: 180px;
+ max-height: 360px;
+ overflow-y: auto;
+ font-family: var(--mono);
+ font-size: 12px;
+ line-height: 1.8;
+ color: rgba(255,255,255,0.7);
+ }
 
-  .log-area .log-line { display: flex; gap: 10px; }
-  .log-area .log-time { color: rgba(255,255,255,0.35); flex-shrink: 0; }
-  .log-area .log-ok { color: #7EC8A0; }
-  .log-area .log-skip { color: #F5C97A; }
-  .log-area .log-err { color: #F07E7E; }
-  .log-area .log-info { color: rgba(255,255,255,0.6); }
-  .log-area .log-head { color: white; font-weight: 500; }
+ .log-area .log-line { display: flex; gap: 10px; }
+ .log-area .log-time { color: rgba(255,255,255,0.35); flex-shrink: 0; }
+ .log-area .log-ok { color: #7EC8A0; }
+ .log-area .log-skip { color: #F5C97A; }
+ .log-area .log-err { color: #F07E7E; }
+ .log-area .log-info { color: rgba(255,255,255,0.6); }
+ .log-area .log-head { color: white; font-weight: 500; }
 
-  .log-empty {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 120px;
-    color: rgba(255,255,255,0.25);
-    font-size: 12px;
-  }
+ .log-empty {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ height: 120px;
+ color: rgba(255,255,255,0.25);
+ font-size: 12px;
+ }
 
-  .results-section {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-  }
+ .results-section {
+ background: var(--surface);
+ border: 1px solid var(--border);
+ border-radius: 12px;
+ overflow: hidden;
+ }
 
-  .results-header {
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+ .results-header {
+ padding: 1rem 1.5rem;
+ border-bottom: 1px solid var(--border);
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ }
 
-  .results-title { font-size: 14px; font-weight: 600; }
+ .results-title { font-size: 14px; font-weight: 600; }
 
-  .results-stats {
-    display: flex;
-    gap: 16px;
-    font-size: 12px;
-    font-family: var(--mono);
-  }
+ .results-stats {
+ display: flex;
+ gap: 16px;
+ font-size: 12px;
+ font-family: var(--mono);
+ }
 
-  .stat { display: flex; align-items: center; gap: 5px; }
-  .stat-dot { width: 7px; height: 7px; border-radius: 50%; }
+ .stat { display: flex; align-items: center; gap: 5px; }
+ .stat-dot { width: 7px; height: 7px; border-radius: 50%; }
 
-  table { width: 100%; border-collapse: collapse; font-size: 12px; }
-  th {
-    text-align: left;
-    padding: 8px 14px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--muted);
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-  }
+ table { width: 100%; border-collapse: collapse; font-size: 12px; }
+ th {
+ text-align: left;
+ padding: 8px 14px;
+ font-size: 10px;
+ font-weight: 600;
+ letter-spacing: 0.07em;
+ text-transform: uppercase;
+ color: var(--muted);
+ background: var(--bg);
+ border-bottom: 1px solid var(--border);
+ }
 
-  td {
-    padding: 10px 14px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: top;
-    line-height: 1.5;
-  }
+ td {
+ padding: 10px 14px;
+ border-bottom: 1px solid var(--border);
+ vertical-align: top;
+ line-height: 1.5;
+ }
 
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: #FAFAF8; }
+ tr:last-child td { border-bottom: none; }
+ tr:hover td { background: #FAFAF8; }
 
-  .pill {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-size: 11px;
-    font-weight: 500;
-  }
+ .pill {
+ display: inline-block;
+ padding: 2px 8px;
+ border-radius: 10px;
+ font-size: 11px;
+ font-weight: 500;
+ }
 
-  .pill-yes { background: var(--success-light); color: var(--success); }
-  .pill-no { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
-  .pill-skip { background: var(--warning-light); color: var(--warning); }
-  .pill-review { background: var(--info-light); color: var(--info); }
-  .pill-err { background: var(--danger-light); color: var(--danger); }
+ .pill-yes { background: var(--success-light); color: var(--success); }
+ .pill-no { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
+ .pill-skip { background: var(--warning-light); color: var(--warning); }
+ .pill-review { background: var(--info-light); color: var(--info); }
+ .pill-err { background: var(--danger-light); color: var(--danger); }
 
-  .filename { font-family: var(--mono); font-size: 11px; color: var(--text); }
+ .filename { font-family: var(--mono); font-size: 11px; color: var(--text); }
 
-  .steps-overview {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 1.25rem;
-  }
+ .steps-overview {
+ display: grid;
+ grid-template-columns: repeat(4, 1fr);
+ gap: 8px;
+ margin-bottom: 1.25rem;
+ }
 
-  .step-chip {
-    padding: 7px 10px;
-    border-radius: 8px;
-    font-size: 11px;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    text-align: center;
-    color: var(--muted);
-  }
+ .step-chip {
+ padding: 7px 10px;
+ border-radius: 8px;
+ font-size: 11px;
+ background: var(--bg);
+ border: 1px solid var(--border);
+ text-align: center;
+ color: var(--muted);
+ }
 
-  .step-chip strong {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 2px;
-  }
+ .step-chip strong {
+ display: block;
+ font-size: 13px;
+ font-weight: 600;
+ color: var(--text);
+ margin-bottom: 2px;
+ }
 
-  .progress-bar-wrap {
-    height: 4px;
-    background: var(--border);
-    border-radius: 2px;
-    margin: 12px 0;
-    overflow: hidden;
-  }
+ .progress-bar-wrap {
+ height: 4px;
+ background: var(--border);
+ border-radius: 2px;
+ margin: 12px 0;
+ overflow: hidden;
+ }
 
-  .progress-bar {
-    height: 100%;
-    background: var(--accent-mid);
-    border-radius: 2px;
-    transition: width 0.4s ease;
-  }
+ .progress-bar {
+ height: 100%;
+ background: var(--accent-mid);
+ border-radius: 2px;
+ transition: width 0.4s ease;
+ }
 
-  .spinner {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 2px solid rgba(255,255,255,0.2);
-    border-top-color: white;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    vertical-align: middle;
-  }
+ .spinner {
+ display: inline-block;
+ width: 14px;
+ height: 14px;
+ border: 2px solid rgba(255,255,255,0.2);
+ border-top-color: white;
+ border-radius: 50%;
+ animation: spin 0.7s linear infinite;
+ vertical-align: middle;
+ }
 
-  @keyframes spin { to { transform: rotate(360deg); } }
+ @keyframes spin { to { transform: rotate(360deg); } }
 
-  .hidden { display: none !important; }
+ .hidden { display: none !important; }
 
-  .tab-row {
-    display: flex;
-    gap: 4px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 1.25rem;
-  }
+ .tab-row {
+ display: flex;
+ gap: 4px;
+ border-bottom: 1px solid var(--border);
+ margin-bottom: 1.25rem;
+ }
 
-  .tab {
-    padding: 8px 14px;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    color: var(--muted);
-    margin-bottom: -1px;
-    background: none;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-  }
+ .tab {
+ padding: 8px 14px;
+ font-size: 12px;
+ font-weight: 500;
+ cursor: pointer;
+ border-bottom: 2px solid transparent;
+ color: var(--muted);
+ margin-bottom: -1px;
+ background: none;
+ border-top: none;
+ border-left: none;
+ border-right: none;
+ }
 
-  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+ .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-  .notice {
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 12px;
-    line-height: 1.6;
-    margin-bottom: 12px;
-  }
-  .notice-warn { background: var(--warning-light); color: var(--warning); border-left: 3px solid var(--warning); }
-  .notice-info { background: var(--info-light); color: var(--info); border-left: 3px solid var(--info); }
+ .notice {
+ padding: 10px 14px;
+ border-radius: 8px;
+ font-size: 12px;
+ line-height: 1.6;
+ margin-bottom: 12px;
+ }
+ .notice-warn { background: var(--warning-light); color: var(--warning); border-left: 3px solid var(--warning); }
+ .notice-info { background: var(--info-light); color: var(--info); border-left: 3px solid var(--info); }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">Anchor Investments <span>|</span> AP Automation</div>
-  <div class="header-right" id="clock"></div>
+ <div class="logo">Anchor Investments <span>|</span> AP Automation</div>
+ <div class="header-right" id="clock"></div>
 </header>
 
 <div class="container">
 
-  <div class="setup-card">
-    <h2>Configuration</h2>
-    <p>Your API key is stored in your browser session only and never sent anywhere except directly to Anthropic.</p>
+ <div class="setup-card">
+ <h2>Configuration</h2>
+ <p>Your API key is stored in your browser session only and never sent anywhere except directly to Anthropic.</p>
 
-    <div class="tab-row">
-      <button class="tab active" onclick="switchTab('google', this)">Google Account</button>
-      <button class="tab" onclick="switchTab('anthropic', this)">Anthropic API Key</button>
-      <button class="tab" onclick="switchTab('folders', this)">Settings</button>
-    </div>
+ <div class="tab-row">
+ <button class="tab active" onclick="switchTab('google', this)">Google Account</button>
+ <button class="tab" onclick="switchTab('anthropic', this)">Anthropic API Key</button>
+ <button class="tab" onclick="switchTab('folders', this)">Settings</button>
+ </div>
 
-    <div id="tab-google">
-      <div class="notice notice-info" style="margin-bottom:16px;">
-        Sign in with your Anchor Google account (erobertson@anchorinv.com). You must have delegated access to accountspayable@anchorinv.com set up by your Google Workspace admin.
-      </div>
-      <div class="auth-section">
-        <button class="btn btn-google" onclick="googleAuth()">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-          </svg>
-          Sign in with Google
-        </button>
-        <div id="authStatus" class="auth-badge disconnected"><div class="dot red"></div> Not connected</div>
-      </div>
-    </div>
+ <div id="tab-google">
+ <div class="notice notice-info" style="margin-bottom:16px;">
+ Sign in with <strong>both</strong> accounts below. The AP inbox account is used to read invoices; your work account is used to send to Yardi and access Google Drive.
+ </div>
 
-    <div id="tab-anthropic" class="hidden">
-      <div class="field-row full">
-        <label>Anthropic API Key</label>
-        <input type="password" id="anthropicKey" placeholder="sk-ant-..." />
-      </div>
-      <p style="font-size:12px; color: var(--muted); margin-top:8px;">
-        Get your key at <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent)">console.anthropic.com</a>. 
-        Used only in your browser to call Anthropic directly. Never stored or sent elsewhere.
-      </p>
-    </div>
+ <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+ <div style="padding:14px; border:1px solid var(--border); border-radius:10px; background:var(--bg);">
+ <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); margin-bottom:10px;">AP Inbox (Read invoices)</div>
+ <div style="font-size:12px; font-family:var(--mono); color:var(--text); margin-bottom:12px;">accountspayable@anchorinv.com</div>
+ <div class="auth-section">
+ <button class="btn btn-google" onclick="googleAuth('ap')">
+ <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+ <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+ <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+ <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+ <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+ </svg>
+ Sign in
+ </button>
+ <div id="authStatusAP" class="auth-badge disconnected"><div class="dot red"></div> Not connected</div>
+ </div>
+ </div>
 
-    <div id="tab-folders" class="hidden">
-      <div class="field-row">
-        <div>
-          <label>Staging Folder ID</label>
-          <input type="text" id="stagingFolderId" value="1RT0wW4mfe41_R73Je1H92zOJTo5ucUCN" />
-        </div>
-        <div>
-          <label>Final Folder ID</label>
-          <input type="text" id="finalFolderId" value="1alpYtGSOkDt6b8RHqrHY6lLqIBGsi-QN" />
-        </div>
-      </div>
-      <div class="field-row">
-        <div>
-          <label>AP Inbox Address</label>
-          <input type="text" id="apEmail" value="accountspayable@anchorinv.com" />
-        </div>
-        <div>
-          <label>Yardi Email Address</label>
-          <input type="text" id="yardiEmail" value="AnchorInv@yardismartap.com" />
-        </div>
-      </div>
-      <div class="field-row full">
-        <label>Your Email (used as Sender for Yardi)</label>
-        <input type="text" id="senderEmail" value="erobertson@anchorinv.com" />
-      </div>
-    </div>
-  </div>
+ <div style="padding:14px; border:1px solid var(--border); border-radius:10px; background:var(--bg);">
+ <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); margin-bottom:10px;">Your Account (Send + Drive)</div>
+ <div style="font-size:12px; font-family:var(--mono); color:var(--text); margin-bottom:12px;">erobertson@anchorinv.com</div>
+ <div class="auth-section">
+ <button class="btn btn-google" onclick="googleAuth('sender')">
+ <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+ <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+ <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+ <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+ <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+ </svg>
+ Sign in
+ </button>
+ <div id="authStatusSender" class="auth-badge disconnected"><div class="dot red"></div> Not connected</div>
+ </div>
+ </div>
+ </div>
+ </div>
 
-  <div class="run-section">
-    <div class="run-header">
-      <div class="run-title">Invoice Processing</div>
-      <div class="run-meta" id="runMeta">Ready</div>
-    </div>
+ <div id="tab-anthropic" class="hidden">
+ <div class="field-row full">
+ <label>Anthropic API Key</label>
+ <input type="password" id="anthropicKey" placeholder="sk-ant-..." />
+ </div>
+ <p style="font-size:12px; color: var(--muted); margin-top:8px;">
+ Get your key at <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent)">console.anthropic.com</a>.
+ Used only in your browser to call Anthropic directly. Never stored or sent elsewhere.
+ </p>
+ </div>
 
-    <div class="steps-overview">
-      <div class="step-chip"><strong id="s-found">—</strong>Emails found</div>
-      <div class="step-chip"><strong id="s-skip">—</strong>Skipped</div>
-      <div class="step-chip"><strong id="s-yardi">—</strong>Sent to Yardi</div>
-      <div class="step-chip"><strong id="s-review">—</strong>Manual review</div>
-    </div>
+ <div id="tab-folders" class="hidden">
+ <div class="field-row">
+ <div>
+ <label>Staging Folder ID</label>
+ <input type="text" id="stagingFolderId" value="1RT0wW4mfe41_R73Je1H92zOJTo5ucUCN" />
+ </div>
+ <div>
+ <label>Final Folder ID</label>
+ <input type="text" id="finalFolderId" value="1alpYtGSOkDt6b8RHqrHY6lLqIBGsi-QN" />
+ </div>
+ </div>
+ <div class="field-row">
+ <div>
+ <label>AP Inbox Address</label>
+ <input type="text" id="apEmail" value="accountspayable@anchorinv.com" />
+ </div>
+ <div>
+ <label>Yardi Email Address</label>
+ <input type="text" id="yardiEmail" value="AnchorInv@yardismartap.com" />
+ </div>
+ </div>
+ <div class="field-row full">
+ <label>Your Email (used as Sender for Yardi)</label>
+ <input type="text" id="senderEmail" value="erobertson@anchorinv.com" />
+ </div>
+ </div>
+ </div>
 
-    <div class="progress-bar-wrap">
-      <div class="progress-bar" id="progressBar" style="width:0%"></div>
-    </div>
+ <div class="run-section">
+ <div class="run-header">
+ <div class="run-title">Invoice Processing</div>
+ <div class="run-meta" id="runMeta">Ready</div>
+ </div>
 
-    <div class="log-area" id="logArea">
-      <div class="log-empty">Logs will appear here when processing begins…</div>
-    </div>
+ <div class="steps-overview">
+ <div class="step-chip"><strong id="s-found">—</strong>Emails found</div>
+ <div class="step-chip"><strong id="s-skip">—</strong>Skipped</div>
+ <div class="step-chip"><strong id="s-yardi">—</strong>Sent to Yardi</div>
+ <div class="step-chip"><strong id="s-review">—</strong>Manual review</div>
+ </div>
 
-    <div style="display:flex; gap:10px; margin-top:1rem; align-items:center;">
-      <button class="btn btn-primary" id="runBtn" onclick="processInvoices()">
-        Process Today's Invoices
-      </button>
-      <button class="btn btn-outline" onclick="clearLog()">Clear Log</button>
-      <div id="runningIndicator" class="hidden" style="font-size:13px; color: var(--muted); display:flex; align-items:center; gap:8px;">
-        <div class="spinner" style="border-color:rgba(0,0,0,0.1); border-top-color: var(--accent-mid);"></div>
-        Processing…
-      </div>
-    </div>
-  </div>
+ <div class="progress-bar-wrap">
+ <div class="progress-bar" id="progressBar" style="width:0%"></div>
+ </div>
 
-  <div class="results-section" id="resultsSection" style="display:none">
-    <div class="results-header">
-      <div class="results-title">Run Summary</div>
-      <div class="results-stats" id="resultsStats"></div>
-    </div>
-    <div style="overflow-x:auto;">
-      <table id="resultsTable">
-        <thead>
-          <tr>
-            <th>File Name</th>
-            <th>Property</th>
-            <th>Sent to Yardi</th>
-            <th>Moved to Final</th>
-            <th>Email Labeled</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody id="resultsBody"></tbody>
-      </table>
-    </div>
-  </div>
+ <div class="log-area" id="logArea">
+ <div class="log-empty">Logs will appear here when processing begins…</div>
+ </div>
+
+ <div style="display:flex; gap:10px; margin-top:1rem; align-items:center;">
+ <button class="btn btn-primary" id="runBtn" onclick="processInvoices()">
+ Process Today's Invoices
+ </button>
+ <button class="btn btn-outline" onclick="clearLog()">Clear Log</button>
+ <div id="runningIndicator" class="hidden" style="font-size:13px; color: var(--muted); display:flex; align-items:center; gap:8px;">
+ <div class="spinner" style="border-color:rgba(0,0,0,0.1); border-top-color: var(--accent-mid);"></div>
+ Processing…
+ </div>
+ </div>
+ </div>
+
+ <div class="results-section" id="resultsSection" style="display:none">
+ <div class="results-header">
+ <div class="results-title">Run Summary</div>
+ <div class="results-stats" id="resultsStats"></div>
+ </div>
+ <div style="overflow-x:auto;">
+ <table id="resultsTable">
+ <thead>
+ <tr>
+ <th>File Name</th>
+ <th>Property</th>
+ <th>Sent to Yardi</th>
+ <th>Moved to Final</th>
+ <th>Email Labeled</th>
+ <th>Notes</th>
+ </tr>
+ </thead>
+ <tbody id="resultsBody"></tbody>
+ </table>
+ </div>
+ </div>
 
 </div>
 
@@ -533,113 +557,137 @@
 const GOOGLE_CLIENT_ID = '415849975882-sk3nrjpslatbcuih5tka531kqr45tfum.apps.googleusercontent.com';
 
 const SKIP_SENDERS = [
-  'manager@thegallatinhotel.com',
-  'manager@russellnashville.com',
-  'manager@506lofts.com',
-  'hannahm@anchorrentals.net',
-  'lindsayd@anchorrentals.net',
-  'tracem@anchorrentals.net',
-  'graceg@anchorrentals.net',
-  'aporter@anchorrentals.net'
+ 'manager@thegallatinhotel.com',
+ 'manager@russellnashville.com',
+ 'manager@506lofts.com',
+ 'hannahm@anchorrentals.net',
+ 'lindsayd@anchorrentals.net',
+ 'tracem@anchorrentals.net',
+ 'graceg@anchorrentals.net',
+ 'aporter@anchorrentals.net'
 ];
 
 const SKIP_KEYWORDS = [
-  'church', '506 church street', '506 lofts', '506 church partners',
-  'the russell', '819 russell street', 'russell nashville',
-  'the gallatin', '2518 gallatin partners', '2510 gallatin ave'
+ 'church', '506 church street', '506 lofts', '506 church partners',
+ 'the russell', '819 russell street', 'russell nashville',
+ 'the gallatin', '2518 gallatin partners', '2510 gallatin ave'
 ];
 
 const MANUAL_REVIEW_PROPS = ['anchor', 'studio', '516 tn'];
 
 const PROPERTY_MAP = [
-  { terms: ['516 tennessee partners', '516 tennessee street memphis'], code: '516 TN' },
-  { terms: ['720 fessey partners', '720 fessey park road'], code: 'Fessey' },
-  { terms: ['312 wilson pike circle', '312 wilson pike cir brentwood'], code: 'Wilson' },
-  { terms: ['1032 vann partners', '1032 vann dr'], code: 'Vann' },
-  { terms: ['1700 8th avenue partners', '1700 8th ave s'], code: '8th' },
-  { terms: ['2008 johnson partners', '2008 johnson industrial'], code: 'Johnson' },
-  { terms: ['2151 highland partners', '2151 n highland ave'], code: 'Highland' },
-  { terms: ['3656 trousdale partners', '3656 trousdale drive'], code: 'Trousdale' },
-  { terms: ['cumberland square partners', '106 cumberland square'], code: 'Cumberland' },
-  { terms: ['evansville partners', '730 s green river rd'], code: 'Evansville' },
-  { terms: ['gastonia restoration', '2595 w franklin blvd'], code: 'Gastonia' },
-  { terms: ['hamilton community partners', '1204 main street hamilton'], code: 'Hamilton' },
-  { terms: ['harrison oh partners', '10560 harrison ave'], code: 'Harrison' },
-  { terms: ['hickory hollow partners', '5301 hickory hollow'], code: 'Hickory Hollow' },
-  { terms: ['lebanon pike partners', '1409 lebanon pike'], code: 'Lebanon' },
-  { terms: ['madison center partners', '1508 gallatin pike'], code: 'Madison' },
-  { terms: ['malone plaza partners', '230 w main street malone'], code: 'Malone' },
-  { terms: ['maple row partners', '235 e main street hendersonville'], code: 'Maple Row' },
-  { terms: ['meridian springs partners', '21 meridian springs'], code: 'Meridian' },
-  { terms: ['millington plaza partners', '8209 us 51 millington'], code: 'Millington' },
-  { terms: ['montgomery community partners', '6261 atlanta hwy', 'virginia college'], code: 'Montgomery' },
-  { terms: ['parma heights partners', '6272 pearl road'], code: 'Parma' },
-  { terms: ['pea ridge partners', '5635 us-60 huntington'], code: 'Pea Ridge' },
-  { terms: ['pell city partners', '803 martin street', 'cropwell, al'], code: 'Pell City' },
-  { terms: ['sevierville forks partners', '201 forks of the river'], code: 'Sevierville' },
-  { terms: ['shelbyville partners', '1840 e michigan road'], code: 'Shelbyville' },
-  { terms: ['russellville community partners', '14001 highway 43 russellville'], code: 'Russellville' },
-  { terms: ['studio suites', '1806 williamson ct'], code: 'Studio' },
-  { terms: ['mcminnville community partners', 'mcminville plaza', '1100 smithville hwy'], code: 'McMinnville' },
+ { terms: ['516 tennessee partners', '516 tennessee street memphis'], code: '516 TN' },
+ { terms: ['720 fessey partners', '720 fessey park road'], code: 'Fessey' },
+ { terms: ['312 wilson pike circle', '312 wilson pike cir brentwood'], code: 'Wilson' },
+ { terms: ['1032 vann partners', '1032 vann dr'], code: 'Vann' },
+ { terms: ['1700 8th avenue partners', '1700 8th ave s'], code: '8th' },
+ { terms: ['2008 johnson partners', '2008 johnson industrial'], code: 'Johnson' },
+ { terms: ['2151 highland partners', '2151 n highland ave'], code: 'Highland' },
+ { terms: ['3656 trousdale partners', '3656 trousdale drive'], code: 'Trousdale' },
+ { terms: ['cumberland square partners', '106 cumberland square'], code: 'Cumberland' },
+ { terms: ['evansville partners', '730 s green river rd'], code: 'Evansville' },
+ { terms: ['gastonia restoration', '2595 w franklin blvd'], code: 'Gastonia' },
+ { terms: ['hamilton community partners', '1204 main street hamilton'], code: 'Hamilton' },
+ { terms: ['harrison oh partners', '10560 harrison ave'], code: 'Harrison' },
+ { terms: ['hickory hollow partners', '5301 hickory hollow'], code: 'Hickory Hollow' },
+ { terms: ['lebanon pike partners', '1409 lebanon pike'], code: 'Lebanon' },
+ { terms: ['madison center partners', '1508 gallatin pike'], code: 'Madison' },
+ { terms: ['malone plaza partners', '230 w main street malone'], code: 'Malone' },
+ { terms: ['maple row partners', '235 e main street hendersonville'], code: 'Maple Row' },
+ { terms: ['meridian springs partners', '21 meridian springs'], code: 'Meridian' },
+ { terms: ['millington plaza partners', '8209 us 51 millington'], code: 'Millington' },
+ { terms: ['montgomery community partners', '6261 atlanta hwy', 'virginia college'], code: 'Montgomery' },
+ { terms: ['parma heights partners', '6272 pearl road'], code: 'Parma' },
+ { terms: ['pea ridge partners', '5635 us-60 huntington'], code: 'Pea Ridge' },
+ { terms: ['pell city partners', '803 martin street', 'cropwell, al'], code: 'Pell City' },
+ { terms: ['sevierville forks partners', '201 forks of the river'], code: 'Sevierville' },
+ { terms: ['shelbyville partners', '1840 e michigan road'], code: 'Shelbyville' },
+ { terms: ['russellville community partners', '14001 highway 43 russellville'], code: 'Russellville' },
+ { terms: ['studio suites', '1806 williamson ct'], code: 'Studio' },
+ { terms: ['mcminnville community partners', 'mcminville plaza', '1100 smithville hwy'], code: 'McMinnville' },
 ];
 
 // ─── STATE ───────────────────────────────────────────────────────────────────
-let accessToken = null;
+let accessToken = null;   // erobertson@ — send + Drive
+let apAccessToken = null; // accountspayable@ — read inbox
 let results = [];
 let logLines = [];
 let counters = { found: 0, skip: 0, yardi: 0, review: 0 };
 
 // ─── UI HELPERS ──────────────────────────────────────────────────────────────
 function switchTab(name, el) {
-  document.querySelectorAll('[id^="tab-"]').forEach(e => e.classList.add('hidden'));
-  document.querySelectorAll('.tab').forEach(e => e.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.remove('hidden');
-  el.classList.add('active');
+ document.querySelectorAll('[id^="tab-"]').forEach(e => e.classList.add('hidden'));
+ document.querySelectorAll('.tab').forEach(e => e.classList.remove('active'));
+ document.getElementById('tab-' + name).classList.remove('hidden');
+ el.classList.add('active');
 }
 
 function updateClock() {
-  const now = new Date();
-  document.getElementById('clock').textContent =
-    now.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' }) + ' ' +
-    now.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
+ const now = new Date();
+ document.getElementById('clock').textContent =
+ now.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' }) + ' ' +
+ now.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
 }
 setInterval(updateClock, 1000);
 updateClock();
 
-// ─── GOOGLE OAUTH (Implicit flow — no server/secret required) ───────────────
-function googleAuth() {
-  const redirectUri = window.location.href.split('?')[0].split('#')[0];
+// ─── GOOGLE OAUTH (Implicit flow — dual account) ─────────────────────────────
+// NOTE: With implicit flow, Google returns the access_token in the URL hash (#)
+// and the state param in the query string (?). We store the role in sessionStorage
+// before redirecting so we can read it back on return — don't rely on state from hash.
+function googleAuth(role) {
+ const redirectUri = window.location.href.split('?')[0].split('#')[0];
 
-  const scopes = [
-    'https://www.googleapis.com/auth/gmail.modify',
-    'https://www.googleapis.com/auth/gmail.send',
-    'https://www.googleapis.com/auth/drive'
-  ].join(' ');
+ // Store which role we're authing so we can pick it up after redirect
+ sessionStorage.setItem('oauth_role_pending', role);
 
-  const params = new URLSearchParams({
-    client_id: GOOGLE_CLIENT_ID,
-    redirect_uri: redirectUri,
-    response_type: 'token',
-    scope: scopes,
-    prompt: 'consent select_account'
-  });
+ const apScopes = [
+ 'https://www.googleapis.com/auth/gmail.modify'
+ ].join(' ');
 
-  window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
+ const senderScopes = [
+ 'https://www.googleapis.com/auth/gmail.send',
+ 'https://www.googleapis.com/auth/drive'
+ ].join(' ');
+
+ const scopes = role === 'ap' ? apScopes : senderScopes;
+
+ const params = new URLSearchParams({
+ client_id: GOOGLE_CLIENT_ID,
+ redirect_uri: redirectUri,
+ response_type: 'token',
+ scope: scopes,
+ prompt: 'consent select_account'
+ });
+
+ window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params}`;
 }
 
 function handleImplicitCallback() {
-  const hash = window.location.hash.substring(1);
-  if (!hash) return;
-  const params = new URLSearchParams(hash);
-  const token = params.get('access_token');
-  if (token) {
-    accessToken = token;
-    document.getElementById('authStatus').className = 'auth-badge connected';
-    document.getElementById('authStatus').innerHTML = '<div class="dot green"></div> Connected';
-    log('Google account connected.', 'ok');
-    // Clean URL hash
-    window.history.replaceState({}, '', window.location.pathname + window.location.search);
-  }
+ const hash = window.location.hash.substring(1);
+ if (!hash) return;
+ const params = new URLSearchParams(hash);
+ const token = params.get('access_token');
+ if (!token) return;
+
+ // Retrieve the role we stored before the redirect
+ const role = sessionStorage.getItem('oauth_role_pending');
+ sessionStorage.removeItem('oauth_role_pending');
+
+ if (role === 'ap') {
+ apAccessToken = token;
+ document.getElementById('authStatusAP').className = 'auth-badge connected';
+ document.getElementById('authStatusAP').innerHTML = '<div class="dot green"></div> Connected';
+ log('AP inbox account connected.', 'ok');
+ } else {
+ accessToken = token;
+ document.getElementById('authStatusSender').className = 'auth-badge connected';
+ document.getElementById('authStatusSender').innerHTML = '<div class="dot green"></div> Connected';
+ log('Sender account connected.', 'ok');
+ }
+
+ // Clean URL hash
+ window.history.replaceState({}, '', window.location.pathname + window.location.search);
 }
 
 // Check for OAuth callback on load
@@ -647,146 +695,195 @@ window.addEventListener('load', handleImplicitCallback);
 
 // ─── LOGGING ─────────────────────────────────────────────────────────────────
 function log(msg, type = 'info') {
-  const area = document.getElementById('logArea');
-  if (logLines.length === 0) area.innerHTML = '';
-  const time = new Date().toLocaleTimeString('en-US', { hour12: false });
-  const line = document.createElement('div');
-  line.className = 'log-line';
-  line.innerHTML = `<span class="log-time">${time}</span><span class="log-${type}">${msg}</span>`;
-  area.appendChild(line);
-  area.scrollTop = area.scrollHeight;
-  logLines.push({ time, msg, type });
+ const area = document.getElementById('logArea');
+ if (logLines.length === 0) area.innerHTML = '';
+ const time = new Date().toLocaleTimeString('en-US', { hour12: false });
+ const line = document.createElement('div');
+ line.className = 'log-line';
+ line.innerHTML = `<span class="log-time">${time}</span><span class="log-${type}">${msg}</span>`;
+ area.appendChild(line);
+ area.scrollTop = area.scrollHeight;
+ logLines.push({ time, msg, type });
 }
 
 function clearLog() {
-  logLines = [];
-  document.getElementById('logArea').innerHTML = '<div class="log-empty">Logs will appear here when processing begins…</div>';
+ logLines = [];
+ document.getElementById('logArea').innerHTML = '<div class="log-empty">Logs will appear here when processing begins…</div>';
 }
 
 function setProgress(pct) {
-  document.getElementById('progressBar').style.width = pct + '%';
+ document.getElementById('progressBar').style.width = pct + '%';
 }
 
 function updateCounters() {
-  document.getElementById('s-found').textContent = counters.found;
-  document.getElementById('s-skip').textContent = counters.skip;
-  document.getElementById('s-yardi').textContent = counters.yardi;
-  document.getElementById('s-review').textContent = counters.review;
+ document.getElementById('s-found').textContent = counters.found;
+ document.getElementById('s-skip').textContent = counters.skip;
+ document.getElementById('s-yardi').textContent = counters.yardi;
+ document.getElementById('s-review').textContent = counters.review;
 }
 
 // ─── API HELPERS ──────────────────────────────────────────────────────────────
-async function gmailRequest(path, options = {}) {
-  const url = `https://gmail.googleapis.com/gmail/v1/users/me${path}`;
-  const resp = await fetch(url, {
-    ...options,
-    headers: {
-      'Authorization': `Bearer ${accessToken}`,
-      'Content-Type': 'application/json',
-      ...(options.headers || {})
-    }
-  });
-  if (!resp.ok) throw new Error(`Gmail API ${resp.status}: ${await resp.text()}`);
-  return resp.json();
+async function gmailRequest(path, options = {}, role = 'ap') {
+ const token = role === 'ap' ? apAccessToken : accessToken;
+ if (!token) throw new Error(`Not signed in for role: ${role}`);
+ const url = `https://gmail.googleapis.com/gmail/v1/users/me${path}`;
+ const resp = await fetch(url, {
+ ...options,
+ headers: {
+ 'Authorization': `Bearer ${token}`,
+ 'Content-Type': 'application/json',
+ ...(options.headers || {})
+ }
+ });
+ if (!resp.ok) throw new Error(`Gmail API ${resp.status}: ${await resp.text()}`);
+ return resp.json();
 }
 
 async function getAttachmentData(messageId, attachmentId) {
-  const data = await gmailRequest(`/messages/${messageId}/attachments/${attachmentId}`);
-  return data.data;
+ const data = await gmailRequest(`/messages/${messageId}/attachments/${attachmentId}`, {}, 'ap');
+ return data.data;
 }
 
 async function uploadToDrive(pdfBase64, filename, folderId) {
-  const boundary = 'anchor_boundary_' + Date.now();
-  const normalized = pdfBase64.replace(/-/g, '+').replace(/_/g, '/');
-  const metadata = JSON.stringify({ name: filename + '.pdf', parents: [folderId] });
+ const token = accessToken;
+ if (!token) throw new Error('Not signed in with sender account for Drive access.');
+ const boundary = 'anchor_boundary_' + Date.now();
+ const normalized = pdfBase64.replace(/-/g, '+').replace(/_/g, '/');
+ const metadata = JSON.stringify({ name: filename + '.pdf', parents: [folderId] });
 
-  const body = [
-    `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${metadata}\r\n`,
-    `--${boundary}\r\nContent-Type: application/pdf\r\nContent-Transfer-Encoding: base64\r\n\r\n${normalized}\r\n`,
-    `--${boundary}--`
-  ].join('');
+ const body = [
+ `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${metadata}\r\n`,
+ `--${boundary}\r\nContent-Type: application/pdf\r\nContent-Transfer-Encoding: base64\r\n\r\n${normalized}\r\n`,
+ `--${boundary}--`
+ ].join('');
 
-  const resp = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${accessToken}`,
-      'Content-Type': `multipart/related; boundary=${boundary}`
-    },
-    body
-  });
+ const resp = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
+ method: 'POST',
+ headers: {
+ 'Authorization': `Bearer ${token}`,
+ 'Content-Type': `multipart/related; boundary=${boundary}`
+ },
+ body
+ });
 
-  if (!resp.ok) throw new Error(`Drive upload ${resp.status}: ${await resp.text()}`);
-  return resp.json();
+ if (!resp.ok) throw new Error(`Drive upload ${resp.status}: ${await resp.text()}`);
+ return resp.json();
 }
 
 async function moveFileToDrive(fileId, fromFolderId, toFolderId) {
-  const resp = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?addParents=${toFolderId}&removeParents=${fromFolderId}`, {
-    method: 'PATCH',
-    headers: { 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({})
-  });
-  if (!resp.ok) throw new Error(`Drive move ${resp.status}`);
-  return resp.json();
+ const resp = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?addParents=${toFolderId}&removeParents=${fromFolderId}`, {
+ method: 'PATCH',
+ headers: { 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+ body: JSON.stringify({})
+ });
+ if (!resp.ok) throw new Error(`Drive move ${resp.status}`);
+ return resp.json();
 }
 
 async function sendYardiEmail(pdfBase64, filename, yardiEmail, senderEmail) {
-  const boundary = 'anchor_mail_' + Date.now();
-  const normalized = pdfBase64.replace(/-/g, '+').replace(/_/g, '/');
+ const boundary = 'anchor_mail_' + Date.now();
+ const normalized = pdfBase64.replace(/-/g, '+').replace(/_/g, '/');
 
-  const rawEmail = [
-    `From: ${senderEmail}`,
-    `To: ${yardiEmail}`,
-    `MIME-Version: 1.0`,
-    `Content-Type: multipart/mixed; boundary="${boundary}"`,
-    ``,
-    `--${boundary}`,
-    `Content-Type: text/plain`,
-    ``,
-    `Invoice attached.`,
-    `--${boundary}`,
-    `Content-Type: application/pdf; name="${filename}.pdf"`,
-    `Content-Transfer-Encoding: base64`,
-    `Content-Disposition: attachment; filename="${filename}.pdf"`,
-    ``,
-    normalized,
-    `--${boundary}--`
-  ].join('\r\n');
+ const rawEmail = [
+ `From: ${senderEmail}`,
+ `To: ${yardiEmail}`,
+ `MIME-Version: 1.0`,
+ `Content-Type: multipart/mixed; boundary="${boundary}"`,
+ ``,
+ `--${boundary}`,
+ `Content-Type: text/plain`,
+ ``,
+ `Invoice attached.`,
+ `--${boundary}`,
+ `Content-Type: application/pdf; name="${filename}.pdf"`,
+ `Content-Transfer-Encoding: base64`,
+ `Content-Disposition: attachment; filename="${filename}.pdf"`,
+ ``,
+ normalized,
+ `--${boundary}--`
+ ].join('\r\n');
 
-  const encoded = btoa(unescape(encodeURIComponent(rawEmail))).replace(/\+/g, '-').replace(/\//g, '_');
+ const encoded = btoa(unescape(encodeURIComponent(rawEmail))).replace(/\+/g, '-').replace(/\//g, '_');
 
-  const resp = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
-    method: 'POST',
-    headers: { 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ raw: encoded })
-  });
+ const resp = await fetch('https://gmail.googleapis.com/gmail/v1/users/me/messages/send', {
+ method: 'POST',
+ headers: { 'Authorization': `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+ body: JSON.stringify({ raw: encoded })
+ });
 
-  if (!resp.ok) throw new Error(`Gmail send ${resp.status}: ${await resp.text()}`);
-  return resp.json();
+ if (!resp.ok) throw new Error(`Gmail send ${resp.status}: ${await resp.text()}`);
+ return resp.json();
+}
+
+async function imageToPdfBase64(imageBase64, mimeType) {
+ return new Promise((resolve, reject) => {
+ const img = new Image();
+ const normalized = imageBase64.replace(/-/g, '+').replace(/_/g, '/');
+ img.onload = () => {
+ const canvas = document.createElement('canvas');
+ canvas.width = img.width;
+ canvas.height = img.height;
+ canvas.getContext('2d').drawImage(img, 0, 0);
+ const dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+ const base64Data = dataUrl.split(',')[1];
+ const pdfBytes = buildImagePdf(base64Data, img.width, img.height);
+ resolve(btoa(pdfBytes));
+ };
+ img.onerror = () => reject(new Error('Failed to load image for PDF conversion'));
+ img.src = `data:${mimeType};base64,${normalized}`;
+ });
+}
+
+function buildImagePdf(jpegBase64, width, height) {
+ const imgData = atob(jpegBase64);
+ const imgLen = imgData.length;
+ const w = Math.round(width * 0.75);
+ const h = Math.round(height * 0.75);
+
+ const obj1 = '1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n';
+ const obj2 = `2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n`;
+ const obj3 = `3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${w} ${h}] /Contents 4 0 R /Resources << /XObject << /Im1 5 0 R >> >> >>\nendobj\n`;
+ const streamContent = `q ${w} 0 0 ${h} 0 0 cm /Im1 Do Q`;
+ const obj4 = `4 0 obj\n<< /Length ${streamContent.length} >>\nstream\n${streamContent}\nendstream\nendobj\n`;
+ const obj5 = `5 0 obj\n<< /Type /XObject /Subtype /Image /Width ${width} /Height ${height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${imgLen} >>\nstream\n${imgData}\nendstream\nendobj\n`;
+
+ const header = '%PDF-1.4\n';
+ let body = header + obj1 + obj2 + obj3 + obj4 + obj5;
+ const xrefOffset = body.length;
+ const xref = 'xref\n0 6\n0000000000 65535 f \n' +
+ String(header.length).padStart(10,'0') + ' 00000 n \n' +
+ String(header.length + obj1.length).padStart(10,'0') + ' 00000 n \n' +
+ String(header.length + obj1.length + obj2.length).padStart(10,'0') + ' 00000 n \n' +
+ String(header.length + obj1.length + obj2.length + obj3.length).padStart(10,'0') + ' 00000 n \n' +
+ String(header.length + obj1.length + obj2.length + obj3.length + obj4.length).padStart(10,'0') + ' 00000 n \n';
+ const trailer = `trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`;
+ return body + xref + trailer;
 }
 
 async function extractInvoiceDetails(base64Pdf) {
-  const apiKey = document.getElementById('anthropicKey').value.trim();
-  if (!apiKey) throw new Error('Anthropic API key not set — enter it in the configuration tab.');
+ const apiKey = document.getElementById('anthropicKey').value.trim();
+ if (!apiKey) throw new Error('Anthropic API key not set — enter it in the configuration tab.');
 
-  const resp = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': apiKey,
-      'anthropic-version': '2023-06-01'
-    },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1000,
-      messages: [{
-        role: 'user',
-        content: [
-          {
-            type: 'document',
-            source: { type: 'base64', media_type: 'application/pdf', data: base64Pdf.replace(/-/g, '+').replace(/_/g, '/') }
-          },
-          {
-            type: 'text',
-            text: `Extract the following fields from this invoice PDF. Return ONLY valid JSON, no markdown, no explanation.
+ const resp = await fetch('https://api.anthropic.com/v1/messages', {
+ method: 'POST',
+ headers: {
+ 'Content-Type': 'application/json',
+ 'x-api-key': apiKey,
+ 'anthropic-version': '2023-06-01'
+ },
+ body: JSON.stringify({
+ model: 'claude-sonnet-4-20250514',
+ max_tokens: 1000,
+ messages: [{
+ role: 'user',
+ content: [
+ {
+ type: 'document',
+ source: { type: 'base64', media_type: 'application/pdf', data: base64Pdf.replace(/-/g, '+').replace(/_/g, '/') }
+ },
+ {
+ type: 'text',
+ text: `Extract the following fields from this invoice PDF. Return ONLY valid JSON, no markdown, no explanation.
 
 Fields:
 - vendor_name: The company or person issuing the invoice
@@ -795,258 +892,280 @@ Fields:
 - bill_to: The full text of the "Bill To", "Customer", or "Service Address" field — copy it exactly as it appears
 
 Example: {"vendor_name":"ABC Plumbing","invoice_number":"INV-4821","amount_due":"1250.00","bill_to":"720 Fessey Partners, LLC\\n720 Fessey Park Road, Nashville, TN 37204"}`
-          }
-        ]
-      }]
-    })
-  });
+ }
+ ]
+ }]
+ })
+ });
 
-  if (!resp.ok) throw new Error(`Anthropic API ${resp.status}: ${await resp.text()}`);
-  const data = await resp.json();
-  const text = data.content.find(b => b.type === 'text')?.text || '';
-  return JSON.parse(text.replace(/```json|```/g, '').trim());
+ if (!resp.ok) throw new Error(`Anthropic API ${resp.status}: ${await resp.text()}`);
+ const data = await resp.json();
+ const text = data.content.find(b => b.type === 'text')?.text || '';
+ return JSON.parse(text.replace(/```json|```/g, '').trim());
 }
 
 function identifyProperty(billTo) {
-  if (!billTo) return 'Anchor';
-  const lower = billTo.toLowerCase();
-  for (const prop of PROPERTY_MAP) {
-    for (const term of prop.terms) {
-      if (lower.includes(term.toLowerCase())) return prop.code;
-    }
-  }
-  return 'Anchor';
+ if (!billTo) return 'Anchor';
+ const lower = billTo.toLowerCase();
+ for (const prop of PROPERTY_MAP) {
+ for (const term of prop.terms) {
+ if (lower.includes(term.toLowerCase())) return prop.code;
+ }
+ }
+ return 'Anchor';
 }
 
 function sanitizeFilename(str) {
-  return str.replace(/[\/\\:*?"<>|]/g, '').trim();
+ return str.replace(/[\/\\:*?"<>|]/g, '').trim();
 }
 
 async function ensureLabel(vendorName) {
-  const labelsResp = await gmailRequest('/labels');
-  const existing = labelsResp.labels.find(l => l.name.toLowerCase() === vendorName.toLowerCase());
-  if (existing) return { id: existing.id, isNew: false };
-  const newLabel = await gmailRequest('/labels', {
-    method: 'POST',
-    body: JSON.stringify({ name: vendorName, labelListVisibility: 'labelShow', messageListVisibility: 'show' })
-  });
-  return { id: newLabel.id, isNew: true };
+ const labelsResp = await gmailRequest('/labels', {}, 'ap');
+ const existing = labelsResp.labels.find(l => l.name.toLowerCase() === vendorName.toLowerCase());
+ if (existing) return { id: existing.id, isNew: false };
+ const newLabel = await gmailRequest('/labels', {
+ method: 'POST',
+ body: JSON.stringify({ name: vendorName, labelListVisibility: 'labelShow', messageListVisibility: 'show' })
+ }, 'ap');
+ return { id: newLabel.id, isNew: true };
 }
 
 async function archiveEmail(messageId, labelId) {
-  await gmailRequest(`/messages/${messageId}/modify`, {
-    method: 'POST',
-    body: JSON.stringify({ addLabelIds: [labelId], removeLabelIds: ['INBOX'] })
-  });
+ await gmailRequest(`/messages/${messageId}/modify`, {
+ method: 'POST',
+ body: JSON.stringify({ addLabelIds: [labelId], removeLabelIds: ['INBOX'] })
+ }, 'ap');
 }
 
 // ─── MAIN PROCESSING ──────────────────────────────────────────────────────────
 async function processInvoices() {
-  if (!accessToken) { alert('Please sign in with Google first.'); return; }
+ if (!accessToken || !apAccessToken) {
+ alert('Please sign in with both Google accounts first (AP inbox and your sender account).');
+ return;
+ }
 
-  const apiKey = document.getElementById('anthropicKey').value.trim();
-  if (!apiKey) { alert('Please enter your Anthropic API key in the configuration tab.'); return; }
+ const apiKey = document.getElementById('anthropicKey').value.trim();
+ if (!apiKey) { alert('Please enter your Anthropic API key in the configuration tab.'); return; }
 
-  const runBtn = document.getElementById('runBtn');
-  const runningIndicator = document.getElementById('runningIndicator');
-  runBtn.disabled = true;
-  runningIndicator.style.display = 'flex';
-  clearLog();
-  results = [];
-  counters = { found: 0, skip: 0, yardi: 0, review: 0 };
-  updateCounters();
-  setProgress(0);
-  document.getElementById('resultsSection').style.display = 'none';
-  document.getElementById('runMeta').textContent = 'Running…';
+ const runBtn = document.getElementById('runBtn');
+ const runningIndicator = document.getElementById('runningIndicator');
+ runBtn.disabled = true;
+ runningIndicator.style.display = 'flex';
+ clearLog();
+ results = [];
+ counters = { found: 0, skip: 0, yardi: 0, review: 0 };
+ updateCounters();
+ setProgress(0);
+ document.getElementById('resultsSection').style.display = 'none';
+ document.getElementById('runMeta').textContent = 'Running…';
 
-  const stagingId = document.getElementById('stagingFolderId').value.trim();
-  const finalId = document.getElementById('finalFolderId').value.trim();
-  const yardiEmail = document.getElementById('yardiEmail').value.trim();
-  const apEmail = document.getElementById('apEmail').value.trim();
-  const senderEmail = document.getElementById('senderEmail').value.trim();
+ const stagingId = document.getElementById('stagingFolderId').value.trim();
+ const finalId = document.getElementById('finalFolderId').value.trim();
+ const yardiEmail = document.getElementById('yardiEmail').value.trim();
+ const apEmail = document.getElementById('apEmail').value.trim();
+ const senderEmail = document.getElementById('senderEmail').value.trim();
 
-  const today = new Date();
-  const dateStr = `${today.getFullYear()}/${String(today.getMonth()+1).padStart(2,'0')}/${String(today.getDate()).padStart(2,'0')}`;
+ const today = new Date();
+ const dateStr = `${today.getFullYear()}/${String(today.getMonth()+1).padStart(2,'0')}/${String(today.getDate()).padStart(2,'0')}`;
 
-  try {
-    log(`Processing invoices for ${today.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' })}`, 'head');
+ try {
+ log(`Processing invoices for ${today.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' })}`, 'head');
 
-    const search = await gmailRequest(`/messages?q=is:unread has:attachment to:${apEmail} after:${dateStr}&maxResults=50`);
-    const messages = search.messages || [];
+ const query = `is:unread has:attachment after:${dateStr}`;
+ log(`Gmail search query: "${query}" in AP inbox`, 'info');
+ const search = await gmailRequest(`/messages?q=${encodeURIComponent(query)}&maxResults=50`, {}, 'ap');
+ const messages = search.messages || [];
 
-    counters.found = messages.length;
-    updateCounters();
-    log(`Found ${messages.length} unread email(s) with attachments.`, messages.length ? 'ok' : 'info');
+ counters.found = messages.length;
+ updateCounters();
+ log(`Found ${messages.length} unread email(s) with attachments.`, messages.length ? 'ok' : 'info');
 
-    if (messages.length === 0) {
-      log('No invoices to process today.', 'info');
-      document.getElementById('runMeta').textContent = 'Complete — nothing to process';
-      showResults();
-      runBtn.disabled = false;
-      runningIndicator.style.display = 'none';
-      return;
-    }
+ if (messages.length === 0) {
+ log('No invoices to process today.', 'info');
+ document.getElementById('runMeta').textContent = 'Complete — nothing to process';
+ showResults();
+ runBtn.disabled = false;
+ runningIndicator.style.display = 'none';
+ return;
+ }
 
-    for (let i = 0; i < messages.length; i++) {
-      setProgress(Math.round(((i + 0.1) / messages.length) * 100));
-      log(`─── Email ${i+1}/${messages.length} ───`, 'head');
+ for (let i = 0; i < messages.length; i++) {
+ setProgress(Math.round(((i + 0.1) / messages.length) * 100));
+ log(`─── Email ${i+1}/${messages.length} ───`, 'head');
 
-      const msg = await gmailRequest(`/messages/${messages[i].id}?format=full`);
-      const headers = msg.payload.headers.reduce((acc, h) => { acc[h.name.toLowerCase()] = h.value; return acc; }, {});
-      const fromFull = headers.from || '';
-      const fromEmail = (fromFull.match(/<(.+?)>/) || [null, fromFull])[1].toLowerCase().trim();
-      const subject = headers.subject || '(no subject)';
+ const msg = await gmailRequest(`/messages/${messages[i].id}?format=full`, {}, 'ap');
+ const headers = msg.payload.headers.reduce((acc, h) => { acc[h.name.toLowerCase()] = h.value; return acc; }, {});
+ const fromFull = headers.from || '';
+ const fromEmail = (fromFull.match(/<(.+?)>/) || [null, fromFull])[1].toLowerCase().trim();
+ const subject = headers.subject || '(no subject)';
 
-      log(`From: ${fromFull}`, 'info');
-      log(`Subject: ${subject}`, 'info');
+ log(`From: ${fromFull}`, 'info');
+ log(`Subject: ${subject}`, 'info');
 
-      // Skip rules
-      if (SKIP_SENDERS.includes(fromEmail)) {
-        log(`SKIP: Sender is in skip list.`, 'skip');
-        counters.skip++; updateCounters();
-        results.push({ filename: subject, property: '—', yardi: 'skip', moved: 'skip', labeled: 'skip', notes: 'Sender skip list' });
-        continue;
-      }
+ // Skip rules
+ if (SKIP_SENDERS.includes(fromEmail)) {
+ log(`SKIP: Sender is in skip list.`, 'skip');
+ counters.skip++; updateCounters();
+ results.push({ filename: subject, property: '—', yardi: 'skip', moved: 'skip', labeled: 'skip', notes: 'Sender skip list' });
+ continue;
+ }
 
-      const subjectLower = subject.toLowerCase();
-      const snippetLower = (msg.snippet || '').toLowerCase();
-      const skipKw = SKIP_KEYWORDS.find(kw => subjectLower.includes(kw) || snippetLower.includes(kw));
-      if (skipKw) {
-        log(`SKIP: Keyword "${skipKw}" matched.`, 'skip');
-        counters.skip++; updateCounters();
-        results.push({ filename: subject, property: '—', yardi: 'skip', moved: 'skip', labeled: 'skip', notes: `Keyword: ${skipKw}` });
-        continue;
-      }
+ const subjectLower = subject.toLowerCase();
+ const snippetLower = (msg.snippet || '').toLowerCase();
+ const skipKw = SKIP_KEYWORDS.find(kw => subjectLower.includes(kw) || snippetLower.includes(kw));
+ if (skipKw) {
+ log(`SKIP: Keyword "${skipKw}" matched.`, 'skip');
+ counters.skip++; updateCounters();
+ results.push({ filename: subject, property: '—', yardi: 'skip', moved: 'skip', labeled: 'skip', notes: `Keyword: ${skipKw}` });
+ continue;
+ }
 
-      // Find PDF attachments
-      const parts = [];
-      function collectParts(part) {
-        if (part.filename && part.body && (part.body.attachmentId || part.body.data)) parts.push(part);
-        if (part.parts) part.parts.forEach(collectParts);
-      }
-      collectParts(msg.payload);
+ // Find PDF or image attachments
+ const parts = [];
+ function collectParts(part) {
+ if (part.filename && part.body && (part.body.attachmentId || part.body.data)) parts.push(part);
+ if (part.parts) part.parts.forEach(collectParts);
+ }
+ collectParts(msg.payload);
 
-      const invoiceParts = parts.filter(p => p.filename.toLowerCase().endsWith('.pdf'));
+ const IMAGE_EXTS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.heic', '.bmp', '.tiff'];
+ const invoiceParts = parts.filter(p => {
+ const fn = p.filename.toLowerCase();
+ return fn.endsWith('.pdf') || IMAGE_EXTS.some(ext => fn.endsWith(ext));
+ });
 
-      if (invoiceParts.length === 0) {
-        log(`No PDF attachment found — skipping.`, 'skip');
-        results.push({ filename: subject, property: '—', yardi: 'no', moved: 'no', labeled: 'no', notes: 'No PDF found' });
-        continue;
-      }
+ if (invoiceParts.length === 0) {
+ log(`No PDF or image attachment found — skipping.`, 'skip');
+ results.push({ filename: subject, property: '—', yardi: 'no', moved: 'no', labeled: 'no', notes: 'No invoice attachment found' });
+ continue;
+ }
 
-      for (const part of invoiceParts) {
-        let rowNotes = [];
-        let result = { filename: '', property: '', yardi: 'no', moved: 'no', labeled: 'no', notes: '' };
+ for (const part of invoiceParts) {
+ let rowNotes = [];
+ let result = { filename: '', property: '', yardi: 'no', moved: 'no', labeled: 'no', notes: '' };
 
-        try {
-          // Get attachment
-          const attachData = part.body.attachmentId
-            ? await getAttachmentData(msg.id, part.body.attachmentId)
-            : part.body.data;
+ try {
+ // Get attachment
+ const rawAttachData = part.body.attachmentId
+ ? await getAttachmentData(msg.id, part.body.attachmentId)
+ : part.body.data;
 
-          // Extract with Claude
-          log(`Extracting invoice data via Claude…`, 'info');
-          const extracted = await extractInvoiceDetails(attachData);
-          result.property = identifyProperty(extracted.bill_to);
+ const fn = part.filename.toLowerCase();
+ const isImage = ['.jpg','.jpeg','.png','.gif','.webp','.bmp','.tiff'].some(e => fn.endsWith(e));
+ let attachData = rawAttachData;
 
-          const fname = sanitizeFilename(`${result.property} - ${extracted.vendor_name} - ${extracted.invoice_number} - ${extracted.amount_due}`);
-          result.filename = fname;
+ if (isImage) {
+ log(`Image attachment detected (${part.filename}) — converting to PDF…`, 'info');
+ const mimeType = part.mimeType || 'image/jpeg';
+ attachData = await imageToPdfBase64(rawAttachData, mimeType);
+ log(`Image converted to PDF successfully.`, 'ok');
+ } else {
+ log(`PDF attachment: ${part.filename}`, 'info');
+ }
 
-          log(`Vendor: ${extracted.vendor_name} | Invoice: ${extracted.invoice_number} | Amount: $${extracted.amount_due} | Property: ${result.property}`, 'ok');
+ // Extract with Claude
+ log(`Extracting invoice data via Claude…`, 'info');
+ const extracted = await extractInvoiceDetails(attachData);
+ result.property = identifyProperty(extracted.bill_to);
 
-          if (result.property === 'Anchor') rowNotes.push('Property unidentified — defaulted to Anchor');
+ const fname = sanitizeFilename(`${result.property} - ${extracted.vendor_name} - ${extracted.invoice_number} - ${extracted.amount_due}`);
+ result.filename = fname;
 
-          // Upload to staging
-          log(`Uploading to staging folder…`, 'info');
-          const uploaded = await uploadToDrive(attachData, fname, stagingId);
-          log(`Saved to staging.`, 'ok');
+ log(`Vendor: ${extracted.vendor_name} | Invoice: ${extracted.invoice_number} | Amount: $${extracted.amount_due} | Property: ${result.property}`, 'ok');
 
-          const propLower = result.property.toLowerCase();
-          if (MANUAL_REVIEW_PROPS.includes(propLower)) {
-            log(`Manual review required for "${result.property}" — not sending to Yardi.`, 'skip');
-            result.yardi = 'review';
-            rowNotes.push('Manual review required');
-            counters.review++;
-          } else {
-            log(`Sending to Yardi (${yardiEmail})…`, 'info');
-            await sendYardiEmail(attachData, fname, yardiEmail, senderEmail);
-            result.yardi = 'yes';
-            counters.yardi++;
-            log(`Yardi email sent.`, 'ok');
+ if (result.property === 'Anchor') rowNotes.push('Property unidentified — defaulted to Anchor');
 
-            log(`Moving to final folder…`, 'info');
-            await moveFileToDrive(uploaded.id, stagingId, finalId);
-            result.moved = 'yes';
-            log(`Moved to "Entered in Yardi" folder.`, 'ok');
-          }
+ // Upload to staging
+ log(`Uploading to staging folder…`, 'info');
+ const uploaded = await uploadToDrive(attachData, fname, stagingId);
+ log(`Saved to staging.`, 'ok');
 
-          // Label & archive
-          const vendorLabel = extracted.vendor_name || 'Unknown Vendor';
-          log(`Labeling email as "${vendorLabel}" and archiving…`, 'info');
-          const { id: labelId, isNew } = await ensureLabel(vendorLabel);
-          await archiveEmail(msg.id, labelId);
-          result.labeled = 'yes';
-          if (isNew) rowNotes.push(`New label created: "${vendorLabel}"`);
-          log(`Email labeled and removed from inbox.`, 'ok');
+ const propLower = result.property.toLowerCase();
+ if (MANUAL_REVIEW_PROPS.includes(propLower)) {
+ log(`Manual review required for "${result.property}" — not sending to Yardi.`, 'skip');
+ result.yardi = 'review';
+ rowNotes.push('Manual review required');
+ counters.review++;
+ } else {
+ log(`Sending to Yardi (${yardiEmail})…`, 'info');
+ await sendYardiEmail(attachData, fname, yardiEmail, senderEmail);
+ result.yardi = 'yes';
+ counters.yardi++;
+ log(`Yardi email sent.`, 'ok');
 
-        } catch (err) {
-          log(`Error: ${err.message}`, 'err');
-          rowNotes.push(`Error: ${err.message}`);
-          result.yardi = 'error';
-        }
+ log(`Moving to final folder…`, 'info');
+ await moveFileToDrive(uploaded.id, stagingId, finalId);
+ result.moved = 'yes';
+ log(`Moved to "Entered in Yardi" folder.`, 'ok');
+ }
 
-        result.notes = rowNotes.join('; ');
-        results.push(result);
-        updateCounters();
-      }
+ // Label & archive
+ const vendorLabel = extracted.vendor_name || 'Unknown Vendor';
+ log(`Labeling email as "${vendorLabel}" and archiving…`, 'info');
+ const { id: labelId, isNew } = await ensureLabel(vendorLabel);
+ await archiveEmail(msg.id, labelId);
+ result.labeled = 'yes';
+ if (isNew) rowNotes.push(`New label created: "${vendorLabel}"`);
+ log(`Email labeled and removed from inbox.`, 'ok');
 
-      setProgress(Math.round(((i + 1) / messages.length) * 100));
-    }
+ } catch (err) {
+ log(`Error: ${err.message}`, 'err');
+ rowNotes.push(`Error: ${err.message}`);
+ result.yardi = 'error';
+ }
 
-  } catch (err) {
-    log(`Fatal error: ${err.message}`, 'err');
-  }
+ result.notes = rowNotes.join('; ');
+ results.push(result);
+ updateCounters();
+ }
 
-  setProgress(100);
-  document.getElementById('runMeta').textContent = `Completed at ${new Date().toLocaleTimeString()}`;
-  log(`─── Processing complete ───`, 'head');
-  showResults();
-  runBtn.disabled = false;
-  runningIndicator.style.display = 'none';
+ setProgress(Math.round(((i + 1) / messages.length) * 100));
+ }
+
+ } catch (err) {
+ log(`Fatal error: ${err.message}`, 'err');
+ }
+
+ setProgress(100);
+ document.getElementById('runMeta').textContent = `Completed at ${new Date().toLocaleTimeString()}`;
+ log(`─── Processing complete ───`, 'head');
+ showResults();
+ runBtn.disabled = false;
+ runningIndicator.style.display = 'none';
 }
 
 function showResults() {
-  document.getElementById('resultsSection').style.display = 'block';
-  const tbody = document.getElementById('resultsBody');
-  tbody.innerHTML = '';
+ document.getElementById('resultsSection').style.display = 'block';
+ const tbody = document.getElementById('resultsBody');
+ tbody.innerHTML = '';
 
-  results.forEach(r => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td class="filename">${r.filename || '—'}</td>
-      <td>${r.property || '—'}</td>
-      <td>${pillFor(r.yardi)}</td>
-      <td>${pillFor(r.moved)}</td>
-      <td>${pillFor(r.labeled)}</td>
-      <td style="font-size:11px; color: var(--muted); max-width:200px;">${r.notes || ''}</td>
-    `;
-    tbody.appendChild(tr);
-  });
+ results.forEach(r => {
+ const tr = document.createElement('tr');
+ tr.innerHTML = `
+ <td class="filename">${r.filename || '—'}</td>
+ <td>${r.property || '—'}</td>
+ <td>${pillFor(r.yardi)}</td>
+ <td>${pillFor(r.moved)}</td>
+ <td>${pillFor(r.labeled)}</td>
+ <td style="font-size:11px; color: var(--muted); max-width:200px;">${r.notes || ''}</td>
+ `;
+ tbody.appendChild(tr);
+ });
 
-  document.getElementById('resultsStats').innerHTML = `
-    <div class="stat"><div class="stat-dot" style="background:var(--success)"></div>${counters.yardi} sent to Yardi</div>
-    <div class="stat"><div class="stat-dot" style="background:var(--info)"></div>${counters.review} for review</div>
-    <div class="stat"><div class="stat-dot" style="background:var(--warning)"></div>${counters.skip} skipped</div>
-  `;
+ document.getElementById('resultsStats').innerHTML = `
+ <div class="stat"><div class="stat-dot" style="background:var(--success)"></div>${counters.yardi} sent to Yardi</div>
+ <div class="stat"><div class="stat-dot" style="background:var(--info)"></div>${counters.review} for review</div>
+ <div class="stat"><div class="stat-dot" style="background:var(--warning)"></div>${counters.skip} skipped</div>
+ `;
 }
 
 function pillFor(val) {
-  if (val === 'yes') return '<span class="pill pill-yes">Yes</span>';
-  if (val === 'no') return '<span class="pill pill-no">No</span>';
-  if (val === 'skip') return '<span class="pill pill-skip">Skipped</span>';
-  if (val === 'review') return '<span class="pill pill-review">Manual Review</span>';
-  if (val === 'error') return '<span class="pill pill-err">Error</span>';
-  return '—';
+ if (val === 'yes') return '<span class="pill pill-yes">Yes</span>';
+ if (val === 'no') return '<span class="pill pill-no">No</span>';
+ if (val === 'skip') return '<span class="pill pill-skip">Skipped</span>';
+ if (val === 'review') return '<span class="pill pill-review">Review</span>';
+ if (val === 'error') return '<span class="pill pill-err">Error</span>';
+ return '—';
 }
 </script>
 </body>
