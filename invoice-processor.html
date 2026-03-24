@@ -900,7 +900,7 @@ async function testAnthropicKey() {
  'anthropic-version': '2023-06-01'
  },
  body: JSON.stringify({
- model: 'claude-haiku-4-20250514',
+ model: 'claude-3-haiku-20240307',
  max_tokens: 10,
  messages: [{ role: 'user', content: 'hi' }]
  })
@@ -912,11 +912,11 @@ async function testAnthropicKey() {
  } else {
  const err = await resp.json().catch(() => ({}));
  statusEl.className = 'auth-badge disconnected';
- statusEl.innerHTML = `<div class="dot red"></div> ${err.error?.message || 'Invalid key'}`;
+ statusEl.innerHTML = `<div class="dot red"></div> ${err.error?.message || 'HTTP ' + resp.status}`;
  }
  } catch (e) {
  statusEl.className = 'auth-badge disconnected';
- statusEl.innerHTML = '<div class="dot red"></div> Network error';
+ statusEl.innerHTML = `<div class="dot red"></div> Network error: ${e.message}`;
  }
 }
 
@@ -932,7 +932,7 @@ async function extractInvoiceDetails(base64Pdf) {
  'anthropic-version': '2023-06-01'
  },
  body: JSON.stringify({
- model: 'claude-sonnet-4-20250514',
+ model: 'claude-3-5-sonnet-20241022',
  max_tokens: 1000,
  messages: [{
  role: 'user',
